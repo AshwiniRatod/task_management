@@ -11,7 +11,14 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+// ---------- CORS CONFIGURATION ----------
+app.use(cors({
+  origin: "https://your-frontend.vercel.app", // replace with your Vercel frontend URL
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true, // if you are using cookies/auth
+}));
+// ----------------------------------------
+
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);

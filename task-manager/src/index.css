@@ -1,0 +1,445 @@
+/* =====================================================
+   ROOT VARIABLES
+===================================================== */
+:root {
+  --bg: #f5f7ff;
+  --card: #ffffff;
+  --border: rgba(0, 0, 0, 0.08);
+  --text: #1f2937;
+  --muted: #6b7280;
+  --primary: #6366f1;
+  --primary-light: #8b5cf6;
+  --danger: #ef4444;
+  --radius: 18px;
+}
+
+/* =====================================================
+   GLOBAL RESET
+===================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont;
+  background: radial-gradient(circle at right, #eaeaff, #f5f7ff);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+  touch-action: manipulation;
+}
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+.app-header {
+  margin: 16px;
+  padding: 14px 18px;
+  background: var(--card);
+  border-radius: var(--radius);
+  position: sticky;
+  top: 0;
+  z-index: 1500;
+  overflow: visible; 
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  animation: fadeSlideUp 0.5s ease-out both;
+}
+
+.logo {
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-weight: 800;
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+/* Search */
+.search-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.header-search {
+  width: 100%;
+  padding: 11px 42px 11px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #f1f3ff;
+  font-size: 14px;
+}
+
+.search-wrapper::after {
+  content: "🔍";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.6;
+}
+/* =====================================================
+   HEADER FIX - LOGO, SEARCH, NOTIFICATION, LOGOUT
+===================================================== */
+.app-header {
+  margin: 16px;
+  padding: 14px 18px;
+  background: var(--card);
+  border-radius: var(--radius);
+  position: sticky;
+  top: 0;
+  z-index: 1500;
+  overflow: visible; 
+  display: grid;
+  grid-template-columns: auto 1fr auto auto; /* logo | search | bell | logout */
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  animation: fadeSlideUp 0.5s ease-out both;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Notification bell styling */
+.notification-bell {
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Logout button styling (unchanged) */
+.logout-btn {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: #fff;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================
+   MOBILE FIX
+========================= */
+@media (max-width: 768px) {
+  .app-header {
+    grid-template-columns: 1fr auto auto; /* search shrinks, bell + logout stay right */
+  }
+
+  .header-actions {
+    justify-content: flex-end; /* ensures bell + logout align right */
+    gap: 12px;
+  }
+
+  .search-wrapper {
+    width: 100%;
+  }
+}
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+.main-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 16px;
+}
+
+/* =====================================================
+   STATS GRID
+===================================================== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 19px;
+  box-shadow: 0 10px 28px rgba(99, 102, 241, 0.12);
+}
+
+.stat-card h4 {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.stat-card p {
+  font-size: 26px;
+  font-weight: 800;
+}
+
+/* =====================================================
+   ANALYTICS + ADD TASK
+===================================================== */
+.analytics-actions {
+  display: flex;
+   justify-content: space-between; 
+  align-items: center;
+  gap: 70px;        /* 🔥 THIS controls the space */
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+/* Target ONLY the chart */
+.analytics-panel canvas,
+.analytics-panel svg {
+  width: 280px !important;
+  height: 260px !important;
+  max-width: 100%;
+  max-height: 100%;
+}
+.analytics-panel .chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Reduce chart size */
+.analytics-panel .chart-container canvas,
+.analytics-panel .chart-container svg {
+  width: 260px !important;
+  height: 250px !important;
+}
+/* Common button styles */
+.analytics-btn {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  text-align: center;
+  transition: transform 0.25s ease;
+}
+
+/* View Analytics bigger */
+.analytics-view {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  width: 180px;   /* bigger width */
+  padding: 14px 0; /* taller */
+}
+
+/* Add Task smaller */
+.analytics-add {
+  background: linear-gradient(135deg, #4ade80, #22c55e);
+  width: 130px;   /* smaller width */
+  padding: 12px 0; /* slightly shorter */
+}
+
+.analytics-btn:hover {
+  transform: translateY(-2px);
+}
+/* =========================
+   FORCE ANALYTICS CHART SIZE
+========================= */
+
+.task-overview,
+.analytics-chart,
+.chart-container {
+  width: 100%;
+  max-width: 280px;        /* controls size */
+  height: 280px;           /* 👈 KEY FIX */
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* FORCE CANVAS / SVG TO SHRINK */
+.task-overview canvas,
+.analytics-chart canvas,
+.chart-container canvas,
+.task-overview svg,
+.analytics-chart svg,
+.chart-container svg {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 280px !important;
+  max-height: 280px !important;
+}
+
+
+
+/* =====================================================
+   FILTERS
+===================================================== */
+.filter-card {
+  display: flex;
+  gap: 12px;
+  margin: 16px 10px 24px;
+  flex-wrap: wrap;
+}
+
+.filter-card select {
+  padding: 12px 40px 12px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
+/* =====================================================
+   TASK GRID
+===================================================== */
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* Laptop */
+@media (max-width: 1200px) {
+  .task-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .task-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .task-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =====================================================
+   TASK CARD
+===================================================== */
+.task-card {
+  background: var(--card);
+  border-radius: 22px;
+  padding: 20px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
+}
+
+.task-card.done {
+  opacity: 0.6;
+}
+
+.task-card.done h3 {
+  text-decoration: line-through;
+}
+
+/* =====================================================
+   ACTION BUTTONS
+===================================================== */
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.actions button {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #eef2ff;
+}
+
+.actions .danger {
+  background: var(--danger);
+  color: #fff;
+  border: none;
+}
+
+/* =====================================================
+   ADD TASK MODAL
+===================================================== */
+.task-form-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  margin-top: 90px;
+}
+.task-form-card {
+  position: fixed;
+  top: 90px;              
+  right: 50%;             /* center horizontally */
+  transform: translateX(50%); /* center properly */
+  width: 420px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.18);
+  z-index: 9999;
+}
+
+
+
+.task-form-card input,
+.task-form-card textarea,
+.task-form-card select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 14px;
+  margin-bottom: 14px;
+}
+
+/* =====================================================
+   MOBILE FIXES
+===================================================== */
+@media (max-width: 768px) {
+  .app-header {
+    grid-template-columns: 1fr;
+  }
+
+  .header-actions {
+    justify-content: space-between;
+  }
+
+  .task-form-card {
+    bottom: 0;
+    top: auto;
+    width: 100%;
+    border-radius: 22px 22px 0 0;
+  }
+}

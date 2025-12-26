@@ -1,0 +1,194 @@
+/* =====================================================
+   AUTH CONTAINER
+===================================================== */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #eef2ff, #f8fafc);
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.auth-container::before {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  background-image: url("login.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: 50%;
+  left: 15%;
+  transform: translateY(-50%);
+  animation: floatRobot 4s ease-in-out infinite;
+  transition: transform 0.4s ease;
+}
+
+.auth-container:hover::before {
+  transform: translateY(-50%) scale(1.08) rotate(-2deg);
+}
+
+@keyframes floatRobot {
+  0% { transform: translateY(-50%) translateY(0); }
+  50% { transform: translateY(-50%) translateY(-18px); }
+  100% { transform: translateY(-50%) translateY(0); }
+}
+
+/* =====================================================
+   AUTH FORM
+===================================================== */
+.auth-form {
+  width: 100%;
+  max-width: 420px;
+  padding: 40px;
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  transition: all 0.35s ease;
+}
+
+.auth-form:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 35px 80px rgba(99, 102, 241, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+
+.auth-form h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: clamp(22px, 4vw, 26px);
+  color: #1e293b;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(6px);
+  font-size: 15px;
+  transition: 0.25s;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+}
+
+.auth-form button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6366f1, #818cf8);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.45);
+}
+
+.auth-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(99, 102, 241, 0.6);
+}
+
+.auth-form p {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 14px;
+  color: #475569;
+}
+
+.auth-form a {
+  color: #6366f1;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-form a:hover {
+  text-decoration: underline;
+}
+
+/* =====================================================
+   BACKGROUND EFFECT
+===================================================== */
+.auth-container::after {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(99,102,241,0.35), transparent 70%);
+  right: 12%;
+  bottom: 20%;
+  filter: blur(60px);
+}
+
+/* =====================================================
+   RESPONSIVE MEDIA QUERIES
+===================================================== */
+
+/* Tablets & smaller laptops */
+@media (max-width: 1024px) {
+  .auth-container::before {
+    width: 200px;
+    height: 200px;
+    left: 5%;
+  }
+
+  .auth-container::after {
+    width: 320px;
+    height: 320px;
+    right: 5%;
+    bottom: 15%;
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  .auth-form {
+    padding: 30px 20px;
+  }
+
+  .auth-form h2 {
+    font-size: clamp(20px, 5vw, 24px);
+  }
+
+  .auth-form input, .auth-form button {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .auth-container {
+    padding: 10px;
+  }
+
+  .auth-form {
+    padding: 20px 15px;
+  }
+
+  .auth-form h2 {
+    font-size: clamp(18px, 6vw, 22px);
+  }
+
+  .auth-container::before,
+  .auth-container::after {
+    display: none;
+  }
+}

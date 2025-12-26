@@ -14,7 +14,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const res = await api.post("/auth/login", form);
-      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("token");
       navigate("/");
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");

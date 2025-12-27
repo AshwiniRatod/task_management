@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://task-management-emc8.onrender.com/api/tasks",
+  baseURL: "https://task-management-emc8.onrender.com/api",
 });
 
-// ✅ Attach token automatically
+// Attach token automatically
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {

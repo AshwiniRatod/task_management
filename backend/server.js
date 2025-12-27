@@ -6,10 +6,10 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import taskRoutes from "./routes/taskRoutes.js";
 
-// Load env variables
+// Load environment variables
 dotenv.config();
 
-// Connect to MongoDB
+// Connect MongoDB
 connectDB();
 
 const app = express();
@@ -18,18 +18,18 @@ const app = express();
    MIDDLEWARES
 ========================= */
 
-// Parse JSON
+// Parse JSON body
 app.use(express.json());
 
-// CORS (ALLOW VERCEL FRONTEND)
+// CORS configuration (JWT via Authorization header)
 app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://task-manager-oxhpepiq-ashuratod40-gmailcoms-projects.vercel.app"
+      "https://task-manager-oxhpepiq-ashuratod40-gmailcoms-projects.vercel.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
@@ -37,10 +37,13 @@ app.use(
    ROUTES
 ========================= */
 
-app.use("/api/auth", authRoutes);   // register, login
-app.use("/api/tasks", taskRoutes); // protected routes
+// Auth routes
+app.use("/api/auth", authRoutes);
 
-// Health check route
+// Protected task routes
+app.use("/api/tasks", taskRoutes);
+
+// Health check
 app.get("/", (req, res) => {
   res.status(200).send("Backend is running 🚀");
 });

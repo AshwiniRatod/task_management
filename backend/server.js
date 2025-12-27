@@ -27,7 +27,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://task-manager-oxhpepiq-ashuratod40-gmailcoms-projects.vercel.app",
+      "https://task-manager-git-main-ashuratod40-gmailcoms-projects.vercel.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],

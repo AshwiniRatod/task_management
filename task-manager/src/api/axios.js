@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://task-management-emc8.onrender.com/api",
+  baseURL: "https://task-management-emc8.onrender.com/api/tasks",
 });
 
 // ✅ Attach token automatically

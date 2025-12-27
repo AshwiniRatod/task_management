@@ -11,15 +11,17 @@ export default function Signup() {
   });
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await api.post("/auth/register", form);
-      localStorage.setItem("token", res.data.token);
-      navigate("/");
-    } catch (err) {
-      alert(err.response?.data?.message || "Signup failed");
-    }
-  };
+  e.preventDefault();
+  try {
+    const res = await api.post("/auth/register".trim(), form);
+    localStorage.setItem("token", res.data.token);
+    navigate("/");
+  } catch (err) {
+    console.error(err.response?.data || err.message);
+    alert(err.response?.data?.message || "Signup failed");
+  }
+};
+
 
   return (
     <div className="auth-container">

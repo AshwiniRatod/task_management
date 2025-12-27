@@ -19,7 +19,8 @@ const app = express();
 ========================= */
 
 // Parse JSON body
-app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
+
 
 // CORS configuration (JWT via Authorization header)
 app.use(
